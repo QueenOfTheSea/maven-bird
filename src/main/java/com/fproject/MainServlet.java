@@ -41,29 +41,37 @@ public class MainServlet extends HttpServlet {
         String action = request.getParameter("action");
         String login = request.getParameter("login");
         String password = request.getParameter("password");
+        String errorPassword = "The password should not be empty and less than four caracters";
         List<UserEntity> usersList=helloBean.getAll();
         
-        String link= "/page1.jsp";
+        String link= "/homePage.jsp";
         
         
         
-        if( action!=null && action.equals("p2")){
+        if( action!=null && action.equals("createAccount")){
            
-            link="/p2.jsp";
+            link="/signUp.jsp";
         }
         if( action!=null && action.equals("list")){
             request.setAttribute("usersList",usersList);
             link="/usersList.jsp";
         }
-        if( action!=null && action.equals("f1")){
+        if( action!=null && action.equals("signin")){
              request.setAttribute("login",login);
-            link="/p2.jsp";
+            link="/welcomeUser.jsp";
         }
         if( action!=null && action.equals("create_user")){
             request.setAttribute("login",login);
             request.setAttribute("password",password);
-            helloBean.createUser(login, password);
-            link="/WelcomeUser.jsp";
+            if(password.isEmpty() || password.length()<4){
+                request.setAttribute("errorpassword",errorPassword);
+                link="/signUp.jsp";
+            }
+            else {
+                helloBean.createUser(login, password);
+                link="/welcomeUser.jsp";
+            }
+            
         }
         requestDispatcher = getServletContext().getRequestDispatcher(link);
         requestDispatcher.forward(request, response);

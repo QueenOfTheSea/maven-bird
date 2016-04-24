@@ -1,7 +1,7 @@
 <%-- 
     Document   : usersList
     Created on : Apr 21, 2016, 9:38:24 PM
-    Author     : mohamed
+    Author     : lamya
 --%>
 <%@page import="com.fproject.UserEntity"%>
 <%@page import="java.util.List" %>
@@ -11,6 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="../assets/css/style.css" rel="stylesheet" type="text/css">
         <title>Users List</title>
     </head>
     <body>

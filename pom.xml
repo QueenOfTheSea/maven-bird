@@ -7,7 +7,7 @@
     <version>1.0s</version>
     <packaging>war</packaging>
 
-    <name>FProject</name>
+    <name>ExpManager</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
