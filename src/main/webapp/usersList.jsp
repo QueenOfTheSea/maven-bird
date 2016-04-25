@@ -11,12 +11,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="../assets/css/style.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/style.css" rel="stylesheet" type="text/css">
         <title>Users List</title>
     </head>
     <body>
+        <div class="form-style-10">
         <ul> 
-
             <%  List<UserEntity> users = (List<UserEntity>) request.getAttribute("usersList");
                 for (UserEntity user : users) {%>
             <li> 
@@ -25,5 +25,6 @@
             <% }%>
 
         </ul>
+        </div>
     </body>
 </html>

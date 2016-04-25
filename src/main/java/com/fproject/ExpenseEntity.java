@@ -6,59 +6,35 @@
 package com.fproject;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.List;
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author lamya
  */
 @Entity
-public class UserEntity implements Serializable {
+public class ExpenseEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @Column()
-    private String login;
-    
-    @Column()
-    private String password;
-    
-    @OneToMany(mappedBy = "user")
-    private Collection<ExpenseEntity> expenses;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="USER_ID")
+    private UserEntity user;
 
-    public Collection<ExpenseEntity> getExpenses() {
-        return expenses;
+    public UserEntity getUser() {
+        return user;
     }
 
-    public void setExpenses(Collection<ExpenseEntity> expenses) {
-        this.expenses = expenses;
-    }
-
-     
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 
     public Long getId() {
@@ -68,8 +44,6 @@ public class UserEntity implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    
-    
 
     @Override
     public int hashCode() {
@@ -81,10 +55,10 @@ public class UserEntity implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof UserEntity)) {
+        if (!(object instanceof ExpenseEntity)) {
             return false;
         }
-        UserEntity other = (UserEntity) object;
+        ExpenseEntity other = (ExpenseEntity) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -93,7 +67,7 @@ public class UserEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "com.fproject.UserEntity[ id=" + id + " ]";
+        return "com.fproject.ExpenseEntity[ id=" + id + " ]";
     }
     
 }

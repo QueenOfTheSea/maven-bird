@@ -19,7 +19,7 @@ and open the template in the editor.
 }
 
 .form-style-10{
-    max-width: 1024px;
+    max-width: 1000px;
     padding: 10px 20px;
     background: #f4f7f8;
     margin: 10px auto;
@@ -119,7 +119,20 @@ div.form-style-5 label {
     color: #fff;
     display: inline-block;
     font-size: 0.8em;
-    margin-right: 6px;
+    margin-right: 4px;
+    padding: 4px;
+    line-height: 30px;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+    border-radius: 15px 15px 15px 0px;
+}
+.form-style-10 .info {
+    background: orangered;
+    color: #fff;
+    display: inline-block;
+    font-size: 0.8em;
+    margin-right: 4px;
+    padding: 4px;
     line-height: 30px;
     text-align: center;
     text-shadow: 0 1px 0 rgba(255,255,255,0.2);
