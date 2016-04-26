@@ -41,13 +41,18 @@ public class MainServlet extends HttpServlet {
         String action = request.getParameter("action");
         String login = request.getParameter("login");
         String password = request.getParameter("password");
+        String expensename = request.getParameter("expensename");
+        Double expenseamount = 0.0;
         String errorPassword = "The password should not be empty and less than four caracters";
+        String infoMessage = "Your expense has been added succesfully. Add another one ?";
         List<UserEntity> usersList=helloBean.getAll();
         
         String link= "/homePage.jsp";
         
-        
-        
+        if( action!=null && action.equals("addexpense")){
+            link="/manageExpenses.jsp";
+        }
+                             
         if( action!=null && action.equals("createAccount")){
            
             link="/signUp.jsp";
@@ -58,7 +63,7 @@ public class MainServlet extends HttpServlet {
         }
         if( action!=null && action.equals("signin")){
              request.setAttribute("login",login);
-            link="/welcomeUser.jsp";
+            link="/manageExpenses.jsp";
         }
         if( action!=null && action.equals("create_user")){
             request.setAttribute("login",login);

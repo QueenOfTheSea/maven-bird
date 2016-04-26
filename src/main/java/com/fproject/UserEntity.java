@@ -43,8 +43,6 @@ public class UserEntity implements Serializable {
         this.expenses = expenses;
     }
 
-     
-
     public String getPassword() {
         return password;
     }
