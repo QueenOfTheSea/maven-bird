@@ -6,6 +6,7 @@
 package com.fproject;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -26,10 +28,23 @@ public class ExpenseEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    private Date date;
+     
+    private LocalDate expenseDate;
     private String type;
     private Double amount;
     private Boolean important;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="USER_ID")
+    private UserEntity user;
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
 
     public String getName() {
         return name;
@@ -39,13 +54,15 @@ public class ExpenseEntity implements Serializable {
         this.name = name;
     }
 
-    public Date getDate() {
-        return date;
+    public LocalDate getExpenseDate() {
+        return expenseDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setExpenseDate(LocalDate expenseDate) {
+        this.expenseDate = expenseDate;
     }
+
+ 
 
     public String getType() {
         return type;
@@ -69,18 +86,6 @@ public class ExpenseEntity implements Serializable {
 
     public void setImportant(Boolean important) {
         this.important = important;
-    }
-    
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="USER_ID")
-    private UserEntity user;
-
-    public UserEntity getUser() {
-        return user;
-    }
-
-    public void setUser(UserEntity user) {
-        this.user = user;
     }
 
     public Long getId() {

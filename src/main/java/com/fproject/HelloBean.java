@@ -11,7 +11,7 @@ import javax.ejb.Stateless;
 
 /**
  *
- * @author mohamed
+ * @author lamya
  */
 @Stateless
 public class HelloBean {
@@ -25,6 +25,10 @@ public class HelloBean {
 
     public void createUser(String login, String password) {
         userEntityFacade.createUser(login, password);
+    }
+    
+    public UserEntity getUser(String login,String password){
+        return userEntityFacade.getUser(login, password);
     }
 
 }
