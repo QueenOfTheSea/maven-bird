@@ -62,15 +62,18 @@ public class MainServlet extends HttpServlet {
             UserEntity user = (UserEntity)request.getSession().getAttribute("user");
             String expenseName = request.getParameter("expensename");
             Double expenseAmount = Double.valueOf(request.getParameter("expenseamount"));
+            String expenseType = request.getParameter("expensetype");
+            Boolean expenseImportant = Boolean.valueOf(request.getParameter("expenseimportant"));
             //Get date
-            LocalDate date = LocalDate.now();
+            //LocalDate date = LocalDate.now();
             //'2016-05-29'
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             //String text = date.format(formatter);
             String expenseDate = request.getParameter("expensedate");
             LocalDate parsedDate = LocalDate.parse(expenseDate, formatter);
-            
-            expenseBean.createExpense(expenseName, parsedDate, expenseAmount,user);
+            String username=user.getLogin();
+            request.setAttribute("login", username);
+            expenseBean.createExpense(expenseName,parsedDate,expenseAmount,user,expenseType,expenseImportant);
             link = "/manageExpenses.jsp";
         }
 
@@ -78,10 +81,12 @@ public class MainServlet extends HttpServlet {
 
             link = "/signUp.jsp";
         }
-//        if (action != null && action.equals("list")) {
-//            request.setAttribute("usersList", usersList);
-//            link = "/usersList.jsp";
-//        }
+        if (action != null && action.equals("expenselist")) {
+            UserEntity user = (UserEntity)request.getSession().getAttribute("user");
+            List<ExpenseEntity> expenselist = (List<ExpenseEntity>) user.getExpenses();
+            request.setAttribute("expenseList", expenselist);
+            link = "/expenseList.jsp";
+        }
         if (action != null && action.equals("signin")) {
             String login = request.getParameter("login");
             String password = request.getParameter("password");

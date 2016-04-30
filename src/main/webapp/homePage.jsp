@@ -26,7 +26,6 @@
         </div>
         <div class="form-style-6">
             <span class="signup"><a  href="MainServlet?action=createAccount">Sign UP </a></span>
-            <span class="list"> <a href="MainServlet?action=list">Afficher la liste</a></span>
         </div>
     </body>
 </html>

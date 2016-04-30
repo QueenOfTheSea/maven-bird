@@ -14,7 +14,10 @@
     </head>
     <body>
         <div class="form-style-10">
-        <h1> Hello <%= request.getParameter("login")%></h1>
+        <h1> Hello <%= request.getAttribute("login")%></h1>
+        <div class="form-style-6">
+            <span class="list"> <a href="MainServlet?action=expenselist">Show my expenses</a></span>
+        </div>
         <div class="form-style-5">
         <form action="MainServlet" method="POST">
         <fieldset>
@@ -23,16 +26,16 @@
             <label> Type the amount of money spent </label>
             <input type="number" value="0" name="expenseamount"/>
             <label> Is it fixed or variable ?</label>
-            <select>
+            <select name="expensetype">
                 <option value="variable"> Variable </option>
                 <option value="fixed"> Fixed </option>
             </select>
             <label> When ?</label>
             <input type="date" value="" name="expensedate"/>
             <label> Is it important ?</label>
-            <select>
-                <option value="important"> Yes </option>
-                <option value="notimportant"> No </option>
+            <select name="expenseimportant">
+                <option value="true"> Yes </option>
+                <option value="false"> No </option>
             </select>
             <input type="hidden" value="addexpense" name="action"/>
         </fieldset>

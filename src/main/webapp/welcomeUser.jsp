@@ -17,6 +17,15 @@
         <h1>Welcome <%= request.getParameter("login")%></h1>
         <span class="info"> Your account have been created succesfully !</span>
         </div>
-        
+        <div class="form-style-5">
+        <form action="MainServlet" method="POST">
+        <fieldset>
+            <input type="text" value="Login" name="login"/>
+            <input type="text" value="Password" name="password"/>
+            <input type="hidden" value="signin" name="action"/>
+        </fieldset>
+            <input type="submit" value="SIGN IN" />
+        </form>
+        </div>       
     </body>
 </html>
