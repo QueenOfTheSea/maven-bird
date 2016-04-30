@@ -19,7 +19,7 @@ public class ExpenseBean {
     @EJB
     private ExpenseEntityFacade expenseEntityFacade;
 
-    public void createExpense(String name,LocalDate date,Double amount){
-        expenseEntityFacade.createExpense(name, date, amount);
+    public void createExpense(String name,LocalDate date,Double amount, UserEntity user){
+        expenseEntityFacade.createExpense(name, date, amount, user);
     }
 }

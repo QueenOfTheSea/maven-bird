@@ -23,6 +23,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
 /**
@@ -31,13 +32,12 @@ import javax.websocket.Session;
  */
 @WebServlet(name = "MainServlet", urlPatterns = {"/MainServlet"})
 public class MainServlet extends HttpServlet {
+
     @EJB
     private ExpenseBean expenseBean;
 
     @EJB
     private HelloBean helloBean;
-    
-    
 
     RequestDispatcher requestDispatcher;
 
@@ -53,24 +53,24 @@ public class MainServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
-        Session session = (Session) request.getSession();
         String errorPassword = "The password should not be empty and less than four caracters";
         String infoMessage = "Your expense has been added succesfully. Add another one ?";
-        List<UserEntity> usersList = helloBean.getAll();
 
         String link = "/homePage.jsp";
 
         if (action != null && action.equals("addexpense")) {
+            UserEntity user = (UserEntity)request.getSession().getAttribute("user");
             String expenseName = request.getParameter("expensename");
             Double expenseAmount = Double.valueOf(request.getParameter("expenseamount"));
-            
+            //Get date
             LocalDate date = LocalDate.now();
             //'2016-05-29'
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             //String text = date.format(formatter);
-            String expenseDate =request.getParameter("expensedate");
+            String expenseDate = request.getParameter("expensedate");
             LocalDate parsedDate = LocalDate.parse(expenseDate, formatter);
-            expenseBean.createExpense(expenseName, parsedDate, expenseAmount);
+            
+            expenseBean.createExpense(expenseName, parsedDate, expenseAmount,user);
             link = "/manageExpenses.jsp";
         }
 
@@ -78,13 +78,16 @@ public class MainServlet extends HttpServlet {
 
             link = "/signUp.jsp";
         }
-        if (action != null && action.equals("list")) {
-            request.setAttribute("usersList", usersList);
-            link = "/usersList.jsp";
-        }
+//        if (action != null && action.equals("list")) {
+//            request.setAttribute("usersList", usersList);
+//            link = "/usersList.jsp";
+//        }
         if (action != null && action.equals("signin")) {
             String login = request.getParameter("login");
             String password = request.getParameter("password");
+            UserEntity user = helloBean.getUser(login, password);
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
             request.setAttribute("login", login);
             link = "/manageExpenses.jsp";
         }

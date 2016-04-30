@@ -29,11 +29,12 @@ public class ExpenseEntityFacade extends AbstractFacade<ExpenseEntity> {
         super(ExpenseEntity.class);
     }
     
-    public boolean createExpense(String name,LocalDate date,Double amount){
+    public boolean createExpense(String name,LocalDate date,Double amount, UserEntity user){
         ExpenseEntity ee=new ExpenseEntity();
         ee.setName(name);
         ee.setAmount(amount);
         ee.setExpenseDate(date);
+        ee.setUser(user);
         em.persist(ee);
         em.flush();
         return true;
