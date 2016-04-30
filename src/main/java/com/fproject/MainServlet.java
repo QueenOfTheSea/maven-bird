@@ -23,6 +23,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.websocket.Session;
 
 /**
  *
@@ -52,7 +53,7 @@ public class MainServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
-
+        Session session = (Session) request.getSession();
         String errorPassword = "The password should not be empty and less than four caracters";
         String infoMessage = "Your expense has been added succesfully. Add another one ?";
         List<UserEntity> usersList = helloBean.getAll();
